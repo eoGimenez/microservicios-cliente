@@ -33,7 +33,7 @@ export default function Products() {
 		<div className='body products--div'>
 			<h2 className='title product--title'>Products</h2>
 			<div className='products--add--container'>
-				<Link to={`/`} className='button-4 product--add'>
+				<Link to={`/create`} className='button-4 product--add'>
 					Add
 				</Link>
 				<table className='table--products'>

@@ -1,0 +1,24 @@
+.new--peoduct--title {
+    font-size: 3rem;
+    letter-spacing: -0.03rem;
+}
+.new--product--form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.new--product--form fieldset {
+	border: none;
+	justify-self: center;
+	align-self: center;
+}
+.new--product--form input {
+	border: none;
+	border-bottom: 1px solid black;
+    padding: .5rem 2rem;
+}
+
+.new--product--form button {
+    justify-self: center;
+    align-self: center;
+}
