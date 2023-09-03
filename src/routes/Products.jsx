@@ -1,9 +1,33 @@
 import { Link } from 'react-router-dom';
 import './Products.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const API_URL = `${import.meta.env.VITE_API_URL}`;
 
 export default function Products() {
-    const [products, setProducts] = useState([])
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		let isCancelled = false;
+
+		fetch(`${API_URL}product`)
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw response;
+			})
+			.then((data) => {
+				if (!isCancelled) {
+					setProducts(data.reverse());
+				}
+			})
+			.catch((err) => console.error(err));
+
+		return () => {
+			isCancelled = true;
+		};
+	}, []);
 
 	return (
 		<div className='body products--div'>
@@ -14,29 +38,29 @@ export default function Products() {
 				</Link>
 				<table className='table--products'>
 					<thead className='table--products--head'>
-						<th scope='col'>#</th>
-						<th scope='col'>Name</th>
-						<th scope='col'>Price</th>
-						<th scope='col'>Quantity</th>
-						<th scope='col'>Actions</th>
+						<tr>
+							<th scope='col'>#</th>
+							<th scope='col'>Name</th>
+							<th scope='col'>Price</th>
+							<th scope='col'>Quantity</th>
+							<th scope='col'>Actions</th>
+						</tr>
 					</thead>
 					<tbody>
-                        {
-                            products.map(product => (
-                                <tr className='table--products--row' key={product.id}>
-                                    <td className='table--products--td'>{product.id}</td>
-                                    <td className='table--products--td'>{product.name}</td>
-                                    <td className='table--products--td'>{product.price}</td>
-                                    <td className='table--products--td'>{product.quantity}</td>
-                                    <td className='table--products--td'>
-                                        <p className='table--products--delete' onClick={null}>Delete</p>
-                                    </td>
-                          
-                                </tr>
-                            ))
-                        }
-
-                    </tbody>
+						{products.map((product) => (
+							<tr className='table--products--row' key={product.pk}>
+								<td className='table--products--td'>{product.pk}</td>
+								<td className='table--products--td'>{product.name}</td>
+								<td className='table--products--td'>{product.price}</td>
+								<td className='table--products--td'>{product.quantity}</td>
+								<td className='table--products--td'>
+									<p className='table--products--delete' onClick={null}>
+										Delete
+									</p>
+								</td>
+							</tr>
+						))}
+					</tbody>
 				</table>
 			</div>
 			<div className='products--order--container'>
