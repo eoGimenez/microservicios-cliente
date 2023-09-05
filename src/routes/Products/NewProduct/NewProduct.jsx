@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './NewProduct.css';
 import { useState } from 'react';
 
-const API_URL = `${import.meta.env.VITE_API_URL}`;
+const API_URL = `${import.meta.env.VITE_WAREHOUSE_API_URL}`;
 
 export default function NewProduct() {
 	const [form, setForm] = useState({
@@ -30,7 +30,6 @@ export default function NewProduct() {
 			}),
 			body: json_string,
 		};
-		console.log(requestOptions);
 
 		fetch(`${API_URL}product`, requestOptions)
 			.then((response) => {
@@ -40,6 +39,7 @@ export default function NewProduct() {
 				throw response;
 			})
 			.then((data) => {
+				console.log(data)
 				navigate('/');
 			})
 			.catch((err) => console.error(err));

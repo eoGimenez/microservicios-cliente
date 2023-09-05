@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Products.css';
 import { useEffect, useState } from 'react';
 
-const API_URL = `${import.meta.env.VITE_API_URL}`;
+const API_URL = `${import.meta.env.VITE_WAREHOUSE_API_URL}`;
 
 export default function Products() {
 	const [products, setProducts] = useState([]);
@@ -29,6 +29,20 @@ export default function Products() {
 		};
 	}, []);
 
+	const handleDelete = (id) => {
+		const requestOptions = {
+			method: 'DELETE',
+		};
+		fetch(`${API_URL}product/${id}`, requestOptions)
+			.then((response) => {
+				if (response.ok) {
+					location.reload();
+				}
+				throw response;
+			})
+			.catch((err) => console.error(err));
+	};
+
 	return (
 		<div className='body products--div'>
 			<h2 className='title product--title'>Products</h2>
@@ -54,7 +68,12 @@ export default function Products() {
 								<td className='table--products--td'>{product.price}</td>
 								<td className='table--products--td'>{product.quantity}</td>
 								<td className='table--products--td'>
-									<p className='table--products--delete' onClick={null}>
+									<p
+										className='table--products--delete'
+										onClick={() => {
+											handleDelete(product.pk);
+										}}
+									>
 										Delete
 									</p>
 								</td>
@@ -64,7 +83,7 @@ export default function Products() {
 				</table>
 			</div>
 			<div className='products--order--container'>
-				<Link to={`/`} className='button-4 product--order'>
+				<Link to={`/order`} className='button-4 product--order'>
 					Order
 				</Link>
 			</div>
