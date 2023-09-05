@@ -23,3 +23,12 @@
 	padding: 2rem;
 	justify-content: space-between;
 }
+.table--products--delete {
+	line-height: 1.2;
+}
+
+.table--products--delete:hover,
+.table--products--delete:active {
+	cursor: pointer;
+	box-shadow: 0px -1.2px 0px 0px var(--links--hover) inset;
+}

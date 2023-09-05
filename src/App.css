@@ -1,6 +1,7 @@
 :root {
 
-  --background--table--head: #5f9ea0
+  --background--table--head: #5f9ea0;
+  --links--hover: #4456a6;
 
 }
 html {

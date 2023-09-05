@@ -24,13 +24,13 @@ export default function NewProduct() {
 
 		const json_string = JSON.stringify(form);
 		const requestOptions = {
-            method: 'POST',
+			method: 'POST',
 			headers: new Headers({
-                'Content-Type': 'application/json',
+				'Content-Type': 'application/json',
 			}),
 			body: json_string,
 		};
-        console.log(requestOptions);
+		console.log(requestOptions);
 
 		fetch(`${API_URL}product`, requestOptions)
 			.then((response) => {
